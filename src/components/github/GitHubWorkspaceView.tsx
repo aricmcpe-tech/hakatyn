@@ -117,10 +117,10 @@ export default function GitHubWorkspaceView() {
       <div className="rounded-3xl border border-space-700 bg-space-900/90 shadow-xl overflow-hidden">
         
         {/* Subtabs */}
-        <div className="flex border-b border-space-800 bg-space-950/60 p-2 overflow-x-auto gap-2">
+        <div className="flex border-b border-space-800 bg-space-950/60 p-2 overflow-x-auto no-scrollbar touch-scroll gap-2">
           <button
             onClick={() => setActiveRepoTab('files')}
-            className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-semibold transition-all ${
+            className={`shrink-0 whitespace-nowrap flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-semibold transition-all ${
               activeRepoTab === 'files'
                 ? 'bg-space-800 text-white border border-space-700'
                 : 'text-slate-400 hover:text-white'
@@ -131,7 +131,7 @@ export default function GitHubWorkspaceView() {
           </button>
           <button
             onClick={() => setActiveRepoTab('commits')}
-            className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-semibold transition-all ${
+            className={`shrink-0 whitespace-nowrap flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-semibold transition-all ${
               activeRepoTab === 'commits'
                 ? 'bg-space-800 text-white border border-space-700'
                 : 'text-slate-400 hover:text-white'
@@ -142,7 +142,7 @@ export default function GitHubWorkspaceView() {
           </button>
           <button
             onClick={() => setActiveRepoTab('issues')}
-            className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-semibold transition-all ${
+            className={`shrink-0 whitespace-nowrap flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-semibold transition-all ${
               activeRepoTab === 'issues'
                 ? 'bg-space-800 text-white border border-space-700'
                 : 'text-slate-400 hover:text-white'
@@ -153,7 +153,7 @@ export default function GitHubWorkspaceView() {
           </button>
           <button
             onClick={() => setActiveRepoTab('prs')}
-            className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-semibold transition-all ${
+            className={`shrink-0 whitespace-nowrap flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-semibold transition-all ${
               activeRepoTab === 'prs'
                 ? 'bg-space-800 text-white border border-space-700'
                 : 'text-slate-400 hover:text-white'

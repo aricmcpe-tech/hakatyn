@@ -8,17 +8,46 @@
     --foreground: #f8fafc;
   }
 
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
   body {
     background-color: var(--background);
     color: var(--foreground);
+    min-height: 100dvh;
     font-feature-settings: "rlig" 1, "calt" 1;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   /* Accessible focus ring */
   *:focus-visible {
     outline: 2px solid #06b6d4;
     outline-offset: 2px;
+  }
+
+  /* Remove the 300ms tap delay and grey flash on mobile */
+  button,
+  a,
+  [role="button"],
+  input,
+  select,
+  textarea {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Prevent iOS auto-zoom when focusing form controls */
+  @media (max-width: 767px) {
+    input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+    textarea,
+    select {
+      font-size: 16px !important;
+    }
   }
 }
 
@@ -41,11 +70,57 @@
   background: #334155;
 }
 
-/* Smooth Card Hover transitions */
-.transition-card {
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+/* Touch devices use the native overlay scrollbar instead */
+@media (pointer: coarse) {
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
 }
 
-.transition-card:hover {
-  transform: translateY(-2px);
+/* Hide scrollbar for horizontal pill rows and carousels */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Smooth Card Hover transitions (pointer devices only) */
+.transition-card {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .transition-card:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/* Push-to-start hint for horizontal touch scrollers */
+@media (pointer: coarse) {
+  .touch-scroll {
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+  }
+}
+
+/* Respect the user's reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

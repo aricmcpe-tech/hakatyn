@@ -271,7 +271,7 @@ export default function QuasarWalletView() {
         </h2>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
+          <table className="w-full min-w-[720px] text-left text-xs">
             <thead>
               <tr className="border-b border-space-800 text-[11px] font-bold uppercase tracking-wider text-slate-400">
                 <th className="pb-3">Дата & Время</th>

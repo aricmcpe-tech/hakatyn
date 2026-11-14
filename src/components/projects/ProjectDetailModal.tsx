@@ -26,11 +26,12 @@ export default function ProjectDetailModal({ project, onClose }: Props) {
   const { lang, setActiveTab } = useApp();
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-space-950/80 p-4 backdrop-blur-md">
-      <div className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-3xl border border-cyan-500/30 bg-space-900 p-6 sm:p-8 shadow-2xl space-y-6">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-space-950/80 p-3 sm:p-4 backdrop-blur-md" role="dialog" aria-modal="true" aria-label={project.title}>
+      <div className="relative w-full max-w-3xl max-h-[90dvh] overflow-y-auto overscroll-contain rounded-3xl border border-cyan-500/30 bg-space-900 p-5 sm:p-8 shadow-2xl space-y-6">
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 rounded-full p-2 text-slate-400 hover:bg-space-800 hover:text-white transition-colors"
+          className="absolute top-3 right-3 sm:top-5 sm:right-5 flex h-10 w-10 items-center justify-center rounded-full text-slate-400 hover:bg-space-800 hover:text-white transition-colors"
+          aria-label="Закрыть"
         >
           <X className="h-5 w-5" />
         </button>

@@ -131,12 +131,12 @@ export default function AIMentorView() {
             </p>
           </div>
 
-          <div className="flex items-center gap-2 text-xs bg-space-850 p-2.5 rounded-2xl border border-space-800">
-            <span className="text-slate-400 font-medium">Контекст стартапа:</span>
+          <div className="flex w-full flex-col gap-2 rounded-2xl border border-space-800 bg-space-850 p-2.5 text-xs sm:w-auto sm:flex-row sm:items-center">
+            <span className="shrink-0 font-medium text-slate-400">Контекст стартапа:</span>
             <select
               value={selectedProjectId}
               onChange={(e) => setSelectedProjectId(e.target.value)}
-              className="rounded-xl border border-space-700 bg-space-900 px-3 py-1.5 text-xs font-bold text-cyan-400 focus:outline-none"
+              className="w-full min-w-0 rounded-xl border border-space-700 bg-space-900 px-3 py-1.5 text-xs font-bold text-cyan-400 focus:outline-none sm:w-auto"
             >
               {db.startups.map((s) => (
                 <option key={s.id} value={s.id}>
@@ -159,13 +159,13 @@ export default function AIMentorView() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* Left: Chat Window */}
-        <div className="lg:col-span-2 flex flex-col justify-between rounded-3xl border border-space-800 bg-space-900/90 shadow-card overflow-hidden min-h-[580px]">
+        <div className="lg:col-span-2 flex flex-col justify-between rounded-3xl border border-space-800 bg-space-900/90 shadow-card overflow-hidden min-h-[460px] sm:min-h-[580px]">
           
           {/* Modes Toolbar */}
-          <div className="flex border-b border-space-800 bg-space-950/60 p-2 overflow-x-auto gap-1">
+          <div className="flex border-b border-space-800 bg-space-950/60 p-2 overflow-x-auto no-scrollbar touch-scroll gap-1">
             <button
               onClick={() => setMode('idea')}
-              className={`flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-semibold transition-all ${
+              className={`shrink-0 whitespace-nowrap flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-semibold transition-all ${
                 mode === 'idea'
                   ? 'bg-space-800 text-white border border-space-700 shadow-sm'
                   : 'text-slate-400 hover:text-white'
@@ -176,7 +176,7 @@ export default function AIMentorView() {
             </button>
             <button
               onClick={() => setMode('tech')}
-              className={`flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-semibold transition-all ${
+              className={`shrink-0 whitespace-nowrap flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-semibold transition-all ${
                 mode === 'tech'
                   ? 'bg-space-800 text-white border border-space-700 shadow-sm'
                   : 'text-slate-400 hover:text-white'
@@ -187,7 +187,7 @@ export default function AIMentorView() {
             </button>
             <button
               onClick={() => setMode('business')}
-              className={`flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-semibold transition-all ${
+              className={`shrink-0 whitespace-nowrap flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-semibold transition-all ${
                 mode === 'business'
                   ? 'bg-space-800 text-white border border-space-700 shadow-sm'
                   : 'text-slate-400 hover:text-white'
@@ -198,7 +198,7 @@ export default function AIMentorView() {
             </button>
             <button
               onClick={() => setMode('pitch')}
-              className={`flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-semibold transition-all ${
+              className={`shrink-0 whitespace-nowrap flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-semibold transition-all ${
                 mode === 'pitch'
                   ? 'bg-space-800 text-white border border-space-700 shadow-sm'
                   : 'text-slate-400 hover:text-white'
@@ -210,7 +210,7 @@ export default function AIMentorView() {
           </div>
 
           {/* Quick Starter Prompts */}
-          <div className="px-4 py-2.5 border-b border-space-800/80 bg-space-950/40 flex items-center gap-2 overflow-x-auto">
+          <div className="px-4 py-2.5 border-b border-space-800/80 bg-space-950/40 flex items-center gap-2 overflow-x-auto no-scrollbar touch-scroll">
             <span className="text-[10px] font-bold uppercase text-slate-500 shrink-0">Подсказки:</span>
             {starterPrompts.map((prompt, idx) => (
               <button
@@ -225,7 +225,7 @@ export default function AIMentorView() {
           </div>
 
           {/* Messages Stream */}
-          <div className="flex-1 p-5 space-y-4 overflow-y-auto max-h-[440px]">
+          <div className="flex-1 p-4 sm:p-5 space-y-4 overflow-y-auto overscroll-contain max-h-[45dvh] sm:max-h-[440px]">
             {messages.map((msg, idx) => (
               <div
                 key={idx}

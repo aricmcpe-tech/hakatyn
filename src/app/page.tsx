@@ -77,13 +77,29 @@ function MainContent() {
   };
 
   return (
-    <div className="min-h-screen bg-space-950 text-slate-100 flex flex-col font-sans selection:bg-cyan-500 selection:text-space-950">
+    <div
+      className="min-h-dvh bg-space-950 text-slate-100 flex flex-col font-sans selection:bg-cyan-500 selection:text-space-950"
+      style={{
+        backgroundImage:
+          'radial-gradient(1100px 500px at 15% -10%, rgba(6, 182, 212, 0.07), transparent 60%), radial-gradient(900px 450px at 105% 15%, rgba(99, 102, 241, 0.06), transparent 55%)',
+      }}
+    >
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[70] focus:rounded-xl focus:bg-cyan-500 focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-space-950"
+      >
+        Перейти к содержимому
+      </a>
+
       <Navbar />
 
       <div className="flex flex-1">
         <Sidebar />
 
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full overflow-y-auto">
+        <main
+          id="main-content"
+          className="flex-1 w-full max-w-7xl mx-auto px-4 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-8 overflow-y-auto"
+        >
           {renderView()}
         </main>
       </div>

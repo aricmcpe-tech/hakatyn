@@ -70,10 +70,10 @@ export default function LeaderboardView() {
       </div>
 
       {/* Filters Bar */}
-      <div className="rounded-3xl border border-space-700 bg-space-900/90 p-4 shadow-xl flex items-center gap-2 overflow-x-auto">
+      <div className="rounded-3xl border border-space-700 bg-space-900/90 p-4 shadow-xl flex items-center gap-2 overflow-x-auto no-scrollbar touch-scroll">
         <button
           onClick={() => setFilterType('global')}
-          className={`rounded-xl px-4 py-2 text-xs font-bold transition-all ${
+          className={`shrink-0 whitespace-nowrap rounded-xl px-4 py-2 text-xs font-bold transition-all ${
             filterType === 'global'
               ? 'bg-cyan-500 text-space-950 shadow-quasar-sm'
               : 'text-slate-400 hover:text-white hover:bg-space-800'
@@ -83,7 +83,7 @@ export default function LeaderboardView() {
         </button>
         <button
           onClick={() => setFilterType('weekly')}
-          className={`rounded-xl px-4 py-2 text-xs font-bold transition-all ${
+          className={`shrink-0 whitespace-nowrap rounded-xl px-4 py-2 text-xs font-bold transition-all ${
             filterType === 'weekly'
               ? 'bg-cyan-500 text-space-950 shadow-quasar-sm'
               : 'text-slate-400 hover:text-white hover:bg-space-800'
@@ -93,7 +93,7 @@ export default function LeaderboardView() {
         </button>
         <button
           onClick={() => setFilterType('season')}
-          className={`rounded-xl px-4 py-2 text-xs font-bold transition-all ${
+          className={`shrink-0 whitespace-nowrap rounded-xl px-4 py-2 text-xs font-bold transition-all ${
             filterType === 'season'
               ? 'bg-cyan-500 text-space-950 shadow-quasar-sm'
               : 'text-slate-400 hover:text-white hover:bg-space-800'
@@ -103,7 +103,7 @@ export default function LeaderboardView() {
         </button>
         <button
           onClick={() => setFilterType('teams')}
-          className={`rounded-xl px-4 py-2 text-xs font-bold transition-all ${
+          className={`shrink-0 whitespace-nowrap rounded-xl px-4 py-2 text-xs font-bold transition-all ${
             filterType === 'teams'
               ? 'bg-cyan-500 text-space-950 shadow-quasar-sm'
               : 'text-slate-400 hover:text-white hover:bg-space-800'
@@ -115,7 +115,8 @@ export default function LeaderboardView() {
 
       {/* Leaderboard Table */}
       <div className="rounded-3xl border border-space-700 bg-space-900/90 shadow-xl overflow-hidden">
-        <table className="w-full text-left text-xs">
+        <div className="overflow-x-auto no-scrollbar">
+        <table className="w-full min-w-[680px] text-left text-xs">
           <thead>
             <tr className="border-b border-space-800 bg-space-950/60 text-[11px] font-bold uppercase tracking-wider text-slate-400">
               <th className="py-4 px-6">{t.leaderboard.rank[lang]}</th>
@@ -218,6 +219,7 @@ export default function LeaderboardView() {
             })}
           </tbody>
         </table>
+        </div>
       </div>
     </div>
   );

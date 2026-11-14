@@ -42,12 +42,12 @@ export default function BattlePassView() {
       <div className="rounded-3xl border border-space-800 bg-space-900/90 p-6 sm:p-8 shadow-card">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div className="space-y-2 max-w-2xl">
-            <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1 rounded-md bg-purple-500/10 border border-purple-500/30 px-2.5 py-0.5 text-xs font-bold text-purple-300">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center gap-1 whitespace-nowrap rounded-md bg-purple-500/10 border border-purple-500/30 px-2.5 py-0.5 text-xs font-bold text-purple-300">
                 <Crown className="h-3.5 w-3.5 text-amber-400" />
                 BATTLE PASS • SEASON 01
               </span>
-              <span className="rounded-md bg-space-800 border border-space-700 px-2 py-0.5 text-xs font-mono text-slate-400">
+              <span className="whitespace-nowrap rounded-md bg-space-800 border border-space-700 px-2 py-0.5 text-xs font-mono text-slate-400">
                 Осталось 32 дня
               </span>
             </div>
@@ -86,7 +86,7 @@ export default function BattlePassView() {
           </div>
         </div>
 
-        <div className="overflow-x-auto pb-4">
+        <div className="overflow-x-auto no-scrollbar touch-scroll pb-4">
           <div className="flex gap-4 min-w-[780px]">
             {db.battlePassTiers.map((tier) => {
               const isUnlocked = currentUser.level >= tier.level;

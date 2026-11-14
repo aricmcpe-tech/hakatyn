@@ -375,7 +375,7 @@ export default function InvestorDashboard() {
       {/* Offer Modal */}
       {offerModalStartup && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-space-950/80 p-4 backdrop-blur-md">
-          <div className="relative w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-3xl border border-amber-500/30 bg-space-900 p-6 sm:p-8 shadow-modal">
+          <div className="relative w-full max-w-xl max-h-[90dvh] overflow-y-auto overscroll-contain rounded-3xl border border-amber-500/30 bg-space-900 p-5 sm:p-8 shadow-modal">
             <h2 className="text-lg font-bold text-white flex items-center gap-2">
               <HandCoins className="h-5 w-5 text-amber-400" />
               Инвестиционное предложение для {offerModalStartup.title}

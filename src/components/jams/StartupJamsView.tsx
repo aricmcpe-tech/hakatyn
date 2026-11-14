@@ -183,7 +183,7 @@ export default function StartupJamsView() {
       </div>
 
       {/* Jams Selector Horizontal Track */}
-      <div className="flex gap-3 overflow-x-auto pb-2">
+      <div className="flex gap-3 overflow-x-auto no-scrollbar touch-scroll pb-2">
         {db.jams.map((jam) => (
           <button
             key={jam.id}
@@ -394,7 +394,7 @@ export default function StartupJamsView() {
       {/* Submit Modal */}
       {showSubmitModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-space-950/80 p-4 backdrop-blur-md">
-          <div className="relative w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-3xl border border-space-700 bg-space-900 p-6 sm:p-8 shadow-modal">
+          <div className="relative w-full max-w-xl max-h-[90dvh] overflow-y-auto overscroll-contain rounded-3xl border border-space-700 bg-space-900 p-6 sm:p-8 shadow-modal">
             <h2 className="text-lg font-bold text-white flex items-center gap-2">
               <Trophy className="h-5 w-5 text-indigo-400" />
               Подача проекта на «{selectedJam.title}»
@@ -493,7 +493,7 @@ export default function StartupJamsView() {
       {/* Judging Modal */}
       {evaluatingSub && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-space-950/80 p-4 backdrop-blur-md">
-          <div className="relative w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-3xl border border-indigo-500/40 bg-space-900 p-6 sm:p-8 shadow-modal">
+          <div className="relative w-full max-w-xl max-h-[90dvh] overflow-y-auto overscroll-contain rounded-3xl border border-indigo-500/40 bg-space-900 p-6 sm:p-8 shadow-modal">
             <h2 className="text-lg font-bold text-white flex items-center gap-2">
               <Scale className="h-5 w-5 text-indigo-400" />
               Оценивание: {anonymousJudging ? `Команда #${evaluatingSub.id.slice(-4)}` : evaluatingSub.startupTitle}
@@ -555,7 +555,7 @@ export default function StartupJamsView() {
       {/* Create Jam Modal */}
       {showCreateJamModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-space-950/80 p-4 backdrop-blur-md">
-          <div className="relative w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-3xl border border-space-700 bg-space-900 p-6 sm:p-8 shadow-modal">
+          <div className="relative w-full max-w-xl max-h-[90dvh] overflow-y-auto overscroll-contain rounded-3xl border border-space-700 bg-space-900 p-6 sm:p-8 shadow-modal">
             <h2 className="text-lg font-bold text-white flex items-center gap-2">
               <Trophy className="h-5 w-5 text-indigo-400" />
               Создание Startup Jam

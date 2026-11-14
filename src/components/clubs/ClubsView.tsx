@@ -91,7 +91,7 @@ export default function ClubsView() {
       </div>
 
       {/* Clubs Selector Horizontal Track */}
-      <div className="flex gap-3 overflow-x-auto pb-2">
+      <div className="flex gap-3 overflow-x-auto no-scrollbar touch-scroll pb-2">
         {db.clubs.map((club) => {
           const selected = selectedClub.id === club.id;
           return (

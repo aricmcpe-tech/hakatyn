@@ -211,7 +211,7 @@ export default function EventsView() {
       {/* Travel Grant Application Modal */}
       {showGrantModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-space-950/80 p-4 backdrop-blur-md">
-          <div className="relative w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-3xl border border-indigo-500/30 bg-space-900 p-6 sm:p-8 shadow-2xl">
+          <div className="relative w-full max-w-xl max-h-[90dvh] overflow-y-auto overscroll-contain rounded-3xl border border-indigo-500/30 bg-space-900 p-5 sm:p-8 shadow-2xl">
             <h2 className="text-lg font-bold text-white flex items-center gap-2">
               <Plane className="h-5 w-5 text-cyan-400" />
               Заявка на программу Travel Grants

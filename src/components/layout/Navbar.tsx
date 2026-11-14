@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { translations } from '../../lib/i18n';
 import { UserRole, Language } from '../../lib/types';
+import MobileNav from './MobileNav';
 import {
   Bell,
   Coins,
@@ -20,6 +21,7 @@ import {
   Building,
   Brain,
   ShieldAlert,
+  Menu,
 } from 'lucide-react';
 
 export default function Navbar() {
@@ -39,6 +41,7 @@ export default function Navbar() {
 
   const [showLangMenu, setShowLangMenu] = useState(false);
   const [showNotifMenu, setShowNotifMenu] = useState(false);
+  const [showMobileNav, setShowMobileNav] = useState(false);
 
   const t = translations;
 
@@ -82,22 +85,31 @@ export default function Navbar() {
   };
 
   return (
+    <>
     <header className="sticky top-0 z-50 w-full border-b border-space-800/80 bg-space-950/95 backdrop-blur-lg">
       {/* Primary Top Bar */}
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         
-        {/* Brand Logo */}
-        <div className="flex items-center gap-4">
+        {/* Mobile menu + Brand Logo */}
+        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+          <button
+            onClick={() => setShowMobileNav(true)}
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-space-700 bg-space-850/60 text-slate-300 transition-colors hover:border-space-600 hover:text-white active:bg-space-800 lg:hidden"
+            aria-label="Открыть меню навигации"
+          >
+            <Menu className="h-5 w-5" />
+          </button>
+
           <button 
             onClick={() => setActiveTab('dashboard')}
-            className="flex items-center gap-3 text-left group transition-all"
+            className="flex items-center gap-2.5 text-left group transition-all min-w-0"
           >
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500 to-indigo-600 shadow-sm group-hover:scale-105 transition-transform">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500 to-indigo-600 shadow-sm group-hover:scale-105 transition-transform">
               <Sparkles className="h-4 w-4 text-space-950" />
             </div>
-            <div>
+            <div className="hidden min-[400px]:block min-w-0">
               <div className="flex items-center gap-2">
-                <span className="font-extrabold tracking-tight text-white text-base">AI STARTIFY</span>
+                <span className="font-extrabold tracking-tight text-white text-base whitespace-nowrap">AI STARTIFY</span>
                 <span className="rounded-md bg-cyan-500/10 border border-cyan-500/30 px-1.5 py-0.5 text-[10px] font-bold text-cyan-400">
                   2.0
                 </span>
@@ -115,18 +127,19 @@ export default function Navbar() {
           {/* Quasar Wallet Pill */}
           <button
             onClick={() => setActiveTab('wallet')}
-            className="flex items-center gap-2 rounded-xl border border-cyan-500/30 bg-cyan-950/30 px-3 py-1.5 text-xs font-semibold text-cyan-300 transition-all hover:bg-cyan-900/40 hover:border-cyan-400"
+            className="flex h-10 items-center justify-center gap-2 rounded-xl border border-cyan-500/30 bg-cyan-950/30 px-2 sm:px-3 text-xs font-semibold text-cyan-300 transition-all hover:bg-cyan-900/40 hover:border-cyan-400 active:bg-cyan-900/60"
             title="Quasar Wallet"
+            aria-label={`Quasar Wallet: ${currentUser.quasarBalance} Quasar`}
           >
-            <Coins className="h-3.5 w-3.5 text-cyan-400" />
-            <span className="font-mono font-bold text-white tracking-tight">{currentUser.quasarBalance.toLocaleString()}</span>
-            <span className="text-[10px] text-cyan-400 font-bold uppercase">QUASAR</span>
+            <Coins className="h-4 w-4 shrink-0 text-cyan-400" />
+            <span className="hidden min-[360px]:inline font-mono font-bold text-white tracking-tight">{currentUser.quasarBalance.toLocaleString()}</span>
+            <span className="hidden lg:inline text-[10px] text-cyan-400 font-bold uppercase">QUASAR</span>
           </button>
 
           {/* Anonymous Mode Toggle */}
           <button
             onClick={toggleAnonymousMode}
-            className={`flex items-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs font-medium transition-all ${
+            className={`hidden md:flex items-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs font-medium transition-all ${
               currentUser.isAnonymous
                 ? 'border-purple-500/40 bg-purple-950/30 text-purple-300'
                 : 'border-space-700 bg-space-850/60 text-slate-300 hover:text-white'
@@ -147,17 +160,22 @@ export default function Navbar() {
           </button>
 
           {/* Language Switcher */}
-          <div className="relative">
+          <div className="relative hidden md:block">
             <button
-              onClick={() => setShowLangMenu(!showLangMenu)}
+              onClick={() => {
+                setShowLangMenu(!showLangMenu);
+                setShowNotifMenu(false);
+              }}
               className="flex items-center gap-1.5 rounded-xl border border-space-700 bg-space-850/60 px-2.5 py-1.5 text-xs font-semibold text-slate-300 hover:border-space-600 hover:text-white transition-all"
+              aria-label="Сменить язык"
+              aria-expanded={showLangMenu}
             >
               <Globe className="h-3.5 w-3.5 text-slate-400" />
               <span className="uppercase text-[11px]">{lang}</span>
             </button>
 
             {showLangMenu && (
-              <div className="absolute right-0 mt-2 w-32 rounded-xl border border-space-700 bg-space-900 p-1.5 shadow-modal z-50">
+              <div className="absolute right-0 mt-2 w-32 rounded-xl border border-space-700 bg-space-900 p-1.5 shadow-modal z-50 animate-scaleIn">
                 {(['ru', 'kk', 'en'] as Language[]).map((l) => (
                   <button
                     key={l}
@@ -179,9 +197,13 @@ export default function Navbar() {
           {/* Notifications Bell */}
           <div className="relative">
             <button
-              onClick={() => setShowNotifMenu(!showNotifMenu)}
-              className="relative rounded-xl border border-space-700 bg-space-850/60 p-2 text-slate-300 hover:border-space-600 hover:text-white transition-all"
+              onClick={() => {
+                setShowNotifMenu(!showNotifMenu);
+                setShowLangMenu(false);
+              }}
+              className="flex h-10 w-10 items-center justify-center rounded-xl border border-space-700 bg-space-850/60 text-slate-300 hover:border-space-600 hover:text-white transition-all active:bg-space-800"
               aria-label="Уведомления"
+              aria-expanded={showNotifMenu}
             >
               <Bell className="h-4 w-4" />
               {unreadNotificationsCount > 0 && (
@@ -192,7 +214,7 @@ export default function Navbar() {
             </button>
 
             {showNotifMenu && (
-              <div className="absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl border border-space-700 bg-space-900 p-4 shadow-modal z-50">
+              <div className="fixed left-3 right-3 top-[4.5rem] w-auto rounded-2xl border border-space-700 bg-space-900 p-4 shadow-modal z-50 animate-fadeIn sm:absolute sm:left-auto sm:right-0 sm:top-full sm:mt-2 sm:w-96">
                 <div className="flex items-center justify-between pb-3 border-b border-space-800">
                   <span className="text-xs font-bold text-white uppercase tracking-wider">
                     {t.common.notifications[lang]}
@@ -202,7 +224,7 @@ export default function Navbar() {
                   </span>
                 </div>
 
-                <div className="max-h-72 overflow-y-auto divide-y divide-space-800/60 py-1">
+                <div className="max-h-72 overflow-y-auto overscroll-contain divide-y divide-space-800/60 py-1">
                   {notifications.length === 0 ? (
                     <div className="py-6 text-center text-xs text-slate-500">
                       {t.common.noNotifications[lang]}
@@ -241,7 +263,7 @@ export default function Navbar() {
           </div>
 
           {/* User Profile Mini */}
-          <div className="flex items-center gap-2 pl-2 border-l border-space-800">
+          <div className="flex items-center gap-2 pl-0 border-l-0 border-space-800 sm:pl-2 sm:border-l">
             <img
               src={currentUser.avatar}
               alt={currentUser.name}
@@ -263,7 +285,7 @@ export default function Navbar() {
 
       {/* Sub-Header: 1-Click Role Switcher Bar */}
       <div className="border-t border-space-800/60 bg-space-900/60 px-4 sm:px-6 lg:px-8 py-2">
-        <div className="mx-auto max-w-7xl flex items-center justify-between gap-3 overflow-x-auto">
+        <div className="mx-auto max-w-7xl flex items-center justify-between gap-3 overflow-x-auto no-scrollbar touch-scroll">
           <div className="flex items-center gap-1.5 shrink-0">
             <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 mr-1 hidden sm:inline">
               Роль:
@@ -275,10 +297,10 @@ export default function Navbar() {
                 <button
                   key={r}
                   onClick={() => setRole(r)}
-                  className={`flex items-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs font-semibold transition-all ${
+                  className={`flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-xl border px-3 py-2 text-xs font-semibold transition-all ${
                     isActive
                       ? meta.activeBg
-                      : 'border-transparent text-slate-400 hover:text-white hover:bg-space-800/50'
+                      : 'border-transparent text-slate-400 hover:text-white hover:bg-space-800/50 active:bg-space-800'
                   }`}
                 >
                   <span className={isActive ? meta.color : 'text-slate-500'}>{meta.icon}</span>
@@ -299,5 +321,8 @@ export default function Navbar() {
         </div>
       </div>
     </header>
+
+    <MobileNav open={showMobileNav} onClose={() => setShowMobileNav(false)} />
+    </>
   );
 }
